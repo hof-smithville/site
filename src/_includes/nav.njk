@@ -1,0 +1,14 @@
+<header class="site-nav">
+  <div class="site-nav__inner">
+    <a href="/" class="site-nav__brand">
+      <span class="site-nav__mark"><img src="/assets/icons/block-s.jpg" alt="Smithville block S"></span>
+      <span class="site-nav__wordmark">Smithville<br>Hall of Fame</span>
+    </a>
+    <nav class="site-nav__links">
+      {% for item in site.nav %}
+      <a href="{{ item.url }}">{{ item.label }}</a>
+      {% endfor %}
+      <a href="{{ site.nominateUrl }}" class="btn btn--gold">Nominate</a>
+    </nav>
+  </div>
+</header>

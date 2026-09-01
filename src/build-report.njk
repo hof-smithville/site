@@ -1,0 +1,49 @@
+---
+layout: base.njk
+title: Build report
+---
+<section class="build-report">
+  <h1>Build report</h1>
+  <div class="build-report__timestamp">Generated {{ buildReport.generatedAt }}</div>
+
+  <div class="build-report__stats">
+    <div class="build-report__stat"><span>{{ buildReport.totalInductees }}</span>inductees</div>
+    <div class="build-report__stat"><span>{{ buildReport.totalClasses }}</span>classes</div>
+    <div class="build-report__stat"><span>{{ buildReport.photoMismatched.length }}</span>photo mismatches</div>
+    <div class="build-report__stat"><span>{{ buildReport.photoMissing.length }}</span>photos not provided</div>
+  </div>
+
+  <h2>Photo filename mismatches</h2>
+  <p class="build-report__note">Matching is case-insensitive and ignores the file extension. A missing photo never fails the build — the silhouette placeholder is used instead.</p>
+  {% if buildReport.photoMismatched.length %}
+  <table>
+    <thead><tr><th>Inductee</th><th>Filename in sheet</th><th>Action taken</th></tr></thead>
+    <tbody>
+    {% for m in buildReport.photoMismatched %}
+      <tr><td>{{ m.name }} ({{ m.inductionYear }})</td><td>{{ m.requested }}</td><td>silhouette</td></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+  {% else %}<p>None.</p>{% endif %}
+
+  <h2>Photos not provided</h2>
+  {% if buildReport.photoMissing.length %}
+  <ul>{% for m in buildReport.photoMissing %}<li>{{ m.name }} ({{ m.inductionYear }})</li>{% endfor %}</ul>
+  {% else %}<p>None.</p>{% endif %}
+
+  <h2>Announcement photo mismatches</h2>
+  {% if buildReport.announcementPhotoMismatches.length %}
+  <ul>{% for m in buildReport.announcementPhotoMismatches %}<li>{{ m.headline }}: {{ m.requested }}</li>{% endfor %}</ul>
+  {% else %}<p>None.</p>{% endif %}
+
+  <h2>Data warnings</h2>
+  {% if buildReport.badYears.length %}
+  <ul>{% for b in buildReport.badYears %}<li>{{ b.name }}: {{ b.field }} = "{{ b.raw }}"</li>{% endfor %}</ul>
+  {% else %}<p>None.</p>{% endif %}
+
+  <h2>Committee notes flagged</h2>
+  <p class="build-report__note">Rows where the committee flagged something uncertain in the Notes column.</p>
+  {% if buildReport.flaggedNotes.length %}
+  <ul>{% for n in buildReport.flaggedNotes %}<li><strong>{{ n.name }}</strong>: {{ n.notes }}</li>{% endfor %}</ul>
+  {% else %}<p>None.</p>{% endif %}
+</section>

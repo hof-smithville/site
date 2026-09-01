@@ -1,0 +1,20 @@
+{% macro inducteeCard(p) %}
+<a class="card card--inductee"
+   href="{{ p.url }}"
+   data-search="{{ p.searchText }}"
+   data-category="{{ p.categorySlug }}"
+   data-sport="{{ p.sportSlugsAttr }}"
+   data-induction="{{ p.inductionYear }}"
+   data-grad="{{ p.graduationYear }}">
+  <div class="card__photo">
+    <img src="{{ p.photoUrl }}" alt="{{ p.name }}" loading="lazy">
+  </div>
+  <div class="card__body">
+    <div class="card__name">{{ p.name }}</div>
+    <div class="card__meta">{{ p.sportsLabel }}</div>
+    <div class="card__meta">
+      {% if p.isTeam %}Inducted {{ p.inductionYear }}{% else %}Class of {{ p.graduationYear }} · Inducted {{ p.inductionYear }}{% endif %}
+    </div>
+  </div>
+</a>
+{% endmacro %}

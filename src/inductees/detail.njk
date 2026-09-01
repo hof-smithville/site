@@ -1,0 +1,55 @@
+---
+layout: base.njk
+pagination:
+  data: inductees
+  size: 1
+  alias: person
+permalink: "{{ person.url }}"
+pageScripts:
+  - /assets/js/moving-portrait.js
+eleventyComputed:
+  title: "{{ person.name }}"
+---
+{% from "fact-strip.njk" import factStrip %}
+{% from "nomination-callout.njk" import nominationCallout %}
+
+<section class="detail">
+  <div class="detail__photo-col">
+    <div class="detail__photo" {% if person.movingPortrait.enabled %}data-moving-portrait{% endif %}>
+      <img src="{{ person.photoUrl }}" alt="{{ person.name }}" data-portrait-img>
+      {% if person.movingPortrait.enabled %}<video data-portrait-video src="{{ person.movingPortrait.url }}" muted loop playsinline hidden></video>{% endif %}
+    </div>
+  </div>
+  <div class="detail__body">
+    <div class="detail__eyebrow">Inducted {{ person.inductionYear }} · {{ person.category }}</div>
+    <h1>{{ person.name }}</h1>
+
+    {% if person.isTeam %}
+      {{ factStrip([
+        { label: "Sport", value: person.sportsLabel },
+        { label: "Induction class", value: person.inductionYear }
+      ]) }}
+      <div class="detail__roster">
+        <div class="detail__roster-label">Team members</div>
+        <ul>
+          {% for m in person.teamMembers %}<li>{{ m }}</li>{% endfor %}
+        </ul>
+      </div>
+    {% else %}
+      {{ factStrip([
+        { label: "Sports", value: person.sportsLabel },
+        { label: "Class of", value: person.graduationYear },
+        { label: "Induction class", value: person.inductionYear }
+      ]) }}
+    {% endif %}
+
+    <p class="detail__blurb">{{ person.accomplishments }}</p>
+
+    {{ nominationCallout("Know someone who belongs here?", "Nominate a teammate, a coach, or a team — the committee reads every submission.", "Nominate an inductee", site.nominateUrl) }}
+
+    <div class="detail__links">
+      <a href="/classes/{{ person.inductionYear }}/">← {{ person.inductionYear }} class</a>
+      <a href="/inductees/">All inductees</a>
+    </div>
+  </div>
+</section>

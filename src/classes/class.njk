@@ -1,0 +1,39 @@
+---
+layout: base.njk
+pagination:
+  data: classes
+  size: 1
+  alias: cls
+permalink: "/classes/{{ cls.year }}/"
+eleventyComputed:
+  title: "Class of {{ cls.year }}"
+---
+<section class="class-page">
+  <div class="class-page__head">
+    <div class="class-page__year">{{ cls.year }}</div>
+    <div>
+      <div class="class-page__title">Induction class</div>
+      <div class="class-page__sub">{{ cls.count }} inductee{% if cls.count != 1 %}s{% endif %}</div>
+    </div>
+  </div>
+
+  <div class="chip-row">
+    {% for c in classes %}
+      <a href="/classes/{{ c.year }}/" class="chip {% if c.year == cls.year %}chip--active{% endif %}">{{ c.year }}</a>
+    {% endfor %}
+  </div>
+
+  <div class="class-page__list">
+    {% for p in cls.inductees %}
+      <a class="class-row" href="{{ p.url }}">
+        <img src="{{ p.photoUrl }}" alt="{{ p.name }}" class="class-row__photo">
+        <div class="class-row__main">
+          <div class="class-row__name">{{ p.name }}</div>
+          <div class="class-row__meta">{{ p.category }} · {{ p.sportsLabel }}{% if p.graduationYear %} · Class of {{ p.graduationYear }}{% endif %}</div>
+        </div>
+        <div class="class-row__excerpt">{{ p.accomplishments | truncate(160) }}</div>
+        <span class="class-row__arrow">→</span>
+      </a>
+    {% endfor %}
+  </div>
+</section>

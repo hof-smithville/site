@@ -1,0 +1,15 @@
+---
+layout: base.njk
+title: Induction Classes
+---
+<section class="class-index">
+  <h1>Induction classes</h1>
+  <div class="class-index__list">
+    {% for c in classes %}
+    <a href="/classes/{{ c.year }}/" class="class-index__row">
+      <span class="class-index__year">{{ c.year }}</span>
+      <span class="class-index__count">{{ c.count }} inductee{% if c.count != 1 %}s{% endif %}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>

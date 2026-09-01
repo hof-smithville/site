@@ -1,0 +1,41 @@
+---
+layout: base.njk
+title: All Inductees
+pageScripts:
+  - /assets/js/inductee-filters.js
+---
+{% from "inductee-card.njk" import inducteeCard %}
+{% from "sport-chip.njk" import sportChip %}
+
+<section class="listing">
+  <h1>All inductees</h1>
+  <div class="listing__controls">
+    <input type="search" id="inductee-search" placeholder="Search name, sport, or year…" class="search-input">
+    <select id="inductee-sort" class="sort-select">
+      <option value="induction-desc">Sort: Induction year (newest)</option>
+      <option value="grad-desc">Sort: Graduation year (newest)</option>
+      <option value="name">Sort: Name (A–Z)</option>
+    </select>
+  </div>
+  <div class="chip-row" id="category-filters">
+    <button type="button" class="chip chip--active" data-filter-category="all">All</button>
+    <button type="button" class="chip" data-filter-category="athlete">Athlete</button>
+    <button type="button" class="chip" data-filter-category="coach">Coach</button>
+    <button type="button" class="chip" data-filter-category="team">Team</button>
+    <button type="button" class="chip" data-filter-category="contributor">Contributor</button>
+  </div>
+  <div class="chip-row" id="sport-filters">
+    {% for sport in sportsList %}
+      {{ sportChip(sport) }}
+    {% endfor %}
+  </div>
+  <div class="listing__count" id="inductee-count">{{ inductees.length }} inductees</div>
+  <div class="card-grid" id="inductee-grid">
+    {% for p in inductees %}
+      {{ inducteeCard(p) }}
+    {% endfor %}
+  </div>
+  <div class="listing__empty" id="inductee-empty" hidden>
+    No inductees match that search. <button type="button" id="clear-filters">Clear filters</button>
+  </div>
+</section>

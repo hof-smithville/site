@@ -1,0 +1,35 @@
+---
+layout: base.njk
+title: About
+---
+<section class="about">
+  <div class="about__main">
+    <h1>About the Hall of Fame</h1>
+    <p>Founded in {{ site.establishedYear }} to recognize the athletes, coaches, teams and contributors who shaped Smithville athletics. Inductions are held every other year at a banquet, where each inductee speaks briefly and receives a plaque that hangs in the school.</p>
+
+    <h3>How nomination works</h3>
+    <ol>
+      <li>Anyone may nominate. Candidates must be five years out of Smithville High School.</li>
+      <li>Submit the form with the years they competed, their sports, and anything that documents what they did.</li>
+      <li>The committee reviews all nominations in the spring and selects five to ten inductees per cycle.</li>
+      <li>Nominations carry forward — a candidate not selected stays under consideration.</li>
+    </ol>
+
+    <h3>The committee</h3>
+    <div class="committee-grid">
+      {% for c in committee %}
+      <div class="committee-card">
+        <div class="committee-card__name">{{ c.name }}</div>
+        <div class="committee-card__role">{{ c.role }}</div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+  <aside class="about__aside">
+    <img src="/assets/icons/hof-logo.png" alt="{{ site.title }}" class="about__crest">
+    <div class="callout callout--gold">
+      <div class="callout__heading">Nominations close March 1</div>
+      <a href="{{ site.nominateUrl }}" class="btn btn--green">Nominate</a>
+    </div>
+  </aside>
+</section>

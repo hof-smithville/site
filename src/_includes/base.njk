@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{{ title }} · {{ site.title }}</title>
+<link rel="icon" href="/assets/icons/block-s-smithie.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Public+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/style.css">
+</head>
+<body>
+{% include "nav.njk" %}
+<main>
+{{ content | safe }}
+</main>
+{% include "footer.njk" %}
+{% for script in pageScripts %}
+<script src="{{ script }}" defer></script>
+{% endfor %}
+</body>
+</html>

@@ -1,0 +1,6 @@
+{% macro sportChip(sport) %}
+<button type="button" class="chip" data-filter-sport="{{ sport.slug }}">
+  {% if sport.icon %}<img src="{{ sport.icon }}" alt="" class="chip__icon">{% endif %}
+  <span>{{ sport.name }}</span>
+</button>
+{% endmacro %}

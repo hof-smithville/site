@@ -1,0 +1,12 @@
+module.exports = {
+  title: "Smithville Hall of Fame",
+  establishedYear: 2010,
+  nav: [
+    { label: "Inductees", url: "/inductees/" },
+    { label: "Classes", url: "/classes/" },
+    { label: "About", url: "/about/" },
+  ],
+  nominateUrl: "/nominate/",
+  // TODO: swap in the real Google Form URL once the committee's nomination form exists
+  googleFormUrl: "https://docs.google.com/forms/d/e/TBD/viewform?embedded=true",
+};

@@ -1,0 +1,7 @@
+{% macro nominationCallout(heading, body, ctaLabel, ctaUrl) %}
+<div class="callout callout--gold">
+  <div class="callout__heading">{{ heading }}</div>
+  <p class="callout__body">{{ body }}</p>
+  <a href="{{ ctaUrl }}" class="btn btn--green">{{ ctaLabel }}</a>
+</div>
+{% endmacro %}

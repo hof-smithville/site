@@ -1,0 +1,37 @@
+---
+layout: base.njk
+title: Home
+pageScripts:
+  - /assets/js/mascot.js
+---
+{% from "nomination-callout.njk" import nominationCallout %}
+{% from "announcement-card.njk" import announcementCard %}
+
+<section class="hero">
+  <div class="hero__inner">
+    <div class="hero__brand">
+      <img src="/assets/icons/hof-logo.png" alt="{{ site.title }}" class="hero__crest">
+      <div>
+        <div class="hero__wordmark">Smithville<br>All-Sports<br>Hall of Fame</div>
+        <div class="hero__est">Est. {{ site.establishedYear }} · {{ inductees.length }} inductees</div>
+      </div>
+    </div>
+    <h1 class="hero__headline">Honoring the<br>Blacksmiths</h1>
+    <p class="hero__sub">Every athlete, coach, team and contributor inducted into the Smithville All-Sports Hall of Fame since {{ site.establishedYear }}.</p>
+    <a href="/inductees/" class="btn btn--gold">Browse all inductees</a>
+  </div>
+  {% include "mascot-widget.njk" %}
+</section>
+
+{{ nominationCallout("Know someone who belongs here?", "Tell us who they are, when they played, and what they did — a few sentences is enough to start.", "Open the nomination form", site.nominateUrl) }}
+
+{% if announcements.length %}
+<section class="announcements">
+  <h2>Announcements</h2>
+  <div class="announcements__list">
+    {% for a in announcements %}
+      {{ announcementCard(a, loop.first) }}
+    {% endfor %}
+  </div>
+</section>
+{% endif %}
