@@ -246,6 +246,7 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 24px 64px; }
 /* ===== About ===== */
 .about { display: flex; gap: 48px; padding-top: 32px; flex-wrap: wrap; }
 .about__main { flex: 1 1 560px; }
+.about__main .btn { margin-bottom: 32px; }
 .about__aside { flex: 0 0 280px; display: flex; flex-direction: column; gap: 16px; }
 .about__crest { width: 100%; max-width: 220px; }
 .committee-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 14px; }

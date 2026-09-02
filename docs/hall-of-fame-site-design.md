@@ -58,6 +58,19 @@ Set it up with pre-labelled columns and two or three example rows already filled
 - **Teams share the sheet**, no separate tab. One shape, easier than remembering which tab to use. The category column already tells the site it's a team entry.
 - **No cross-linking.** Individuals from an inducted team do sometimes get inducted separately later, but linking those entries would mean asking the committee to maintain IDs — exactly the kind of thing that breaks.
 
+### A second tab — About page content
+
+The inductee roster isn't the only thing on the site the committee should be able to update without touching code. A second tab in the same sheet drives the About page:
+
+| Column | Notes |
+|---|---|
+| Name | Committee member's name |
+| Title | Their role on the committee (chair, secretary, etc.) — maps to the `role` field the site already uses in `committee.json` |
+
+Plus one more value somewhere on that tab for the **Contribution form URL** — the link to the Google Form sponsors and donors use to contribute to the general fund or the Senior Scholarship Fund. A single value, not a column, since there's only ever one.
+
+Same rules as the inductee tab: plain text, no formatting tricks.
+
 ---
 
 ## 4. Photos
@@ -134,7 +147,7 @@ Put the **build timestamp at the top**. The failure that bites silently is the c
 | All inductees | Browsable list with search and filtering |
 | Inductee detail | Photo, blurb, and a nomination link at the bottom |
 | Induction year | A page per banquet class — how the group thinks about it |
-| About | What the hall of fame is, who's on the committee, how nomination works |
+| About | What the hall of fame is, the committee's mission, who's on the committee, how to sponsor / contribute |
 | Nomination | Google Form, no backend |
 | Build report | Unlisted; doesn't count as a real page |
 

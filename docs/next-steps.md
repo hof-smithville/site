@@ -39,6 +39,7 @@ Blocked on §1 having *something* real to point at — even a partially-filled s
 Small, but blocking a real launch:
 
 - **Real Google Form URL** for `/nominate/` — `src/_data/site.js` has a literal `TODO` placeholder right now.
+- **Real Google Form URL** for the About page's contribution/sponsorship link — same file, same placeholder treatment (`site.contributionFormUrl`).
 - **Real committee roster** for `/about/` — `committee.json` currently has placeholder names.
 - **Confirm nomination deadline / eligibility copy** — currently placeholder text ("March 1", "five years out") copied from the mockup; needs a sanity check against what the committee actually wants to say.
 
