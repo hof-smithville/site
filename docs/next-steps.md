@@ -41,7 +41,7 @@ Small, but blocking a real launch:
 - **Real Google Form URL** for `/nominate/` — `src/_data/site.js` has a literal `TODO` placeholder right now.
 - **Real Google Form URL** for the home page's contribution/sponsorship link — same file, same placeholder treatment (`site.contributionFormUrl`).
 - **Real committee roster** for the home page's "About the Hall of Fame" section — `committee.json` currently has placeholder names.
-- **Confirm nomination deadline / eligibility copy** — currently placeholder text ("March 1", "five years out") copied from the mockup; needs a sanity check against what the committee actually wants to say.
+- **Confirm eligibility copy** — currently placeholder text ("five years out") copied from the mockup; needs a sanity check against what the committee actually wants to say. The nomination-deadline callout ("March 1") was removed from `/nominate/` — decide whether a deadline comes back once the committee has a real one.
 
 ---
 

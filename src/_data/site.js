@@ -4,7 +4,6 @@ module.exports = {
   nav: [
     { label: "Inductees", url: "/inductees/" },
     { label: "Classes", url: "/classes/" },
-    { label: "About", url: "/#about" },
   ],
   nominateUrl: "/nominate/",
   // TODO: swap in the real Google Form URL once the committee's nomination form exists
