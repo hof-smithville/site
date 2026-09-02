@@ -6,7 +6,7 @@
 
 ## Where things stand
 
-The Eleventy site is built and committed (`main`) — all 7 pages, driven entirely by `hall-of-fame-data.csv` and the assets already in the repo. See the root `README.md` for how to run it. It's local-data-first on purpose: nothing here talks to Google yet.
+The Eleventy site is built and committed (`main`) — all 6 pages, driven entirely by `hall-of-fame-data.csv` and the assets already in the repo. See the root `README.md` for how to run it. It's local-data-first on purpose: nothing here talks to Google yet.
 
 The remaining work splits cleanly into two tracks that can run in parallel: **getting real data into a real sheet** (mostly committee work), and **wiring the site up to read that sheet automatically** (mostly dev work). Per the design doc's own framing, the first one is the actual bottleneck — the build is a weekend, the data is where the time goes.
 
@@ -39,8 +39,8 @@ Blocked on §1 having *something* real to point at — even a partially-filled s
 Small, but blocking a real launch:
 
 - **Real Google Form URL** for `/nominate/` — `src/_data/site.js` has a literal `TODO` placeholder right now.
-- **Real Google Form URL** for the About page's contribution/sponsorship link — same file, same placeholder treatment (`site.contributionFormUrl`).
-- **Real committee roster** for `/about/` — `committee.json` currently has placeholder names.
+- **Real Google Form URL** for the home page's contribution/sponsorship link — same file, same placeholder treatment (`site.contributionFormUrl`).
+- **Real committee roster** for the home page's "About the Hall of Fame" section — `committee.json` currently has placeholder names.
 - **Confirm nomination deadline / eligibility copy** — currently placeholder text ("March 1", "five years out") copied from the mockup; needs a sanity check against what the committee actually wants to say.
 
 ---

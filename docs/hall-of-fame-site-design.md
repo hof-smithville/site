@@ -143,11 +143,10 @@ Put the **build timestamp at the top**. The failure that bites silently is the c
 
 | Page | Purpose |
 |---|---|
-| Landing | Hero graphic (school mascot), plus the nomination call-to-action |
+| Landing | Hero graphic (school mascot), the nomination call-to-action, and — folded in below it — what the hall of fame is, the committee's mission, who's on the committee, and how to sponsor / contribute |
 | All inductees | Browsable list with search and filtering |
 | Inductee detail | Photo, blurb, and a nomination link at the bottom |
 | Induction year | A page per banquet class — how the group thinks about it |
-| About | What the hall of fame is, the committee's mission, who's on the committee, how to sponsor / contribute |
 | Nomination | Google Form, no backend |
 | Build report | Unlisted; doesn't count as a real page |
 

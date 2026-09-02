@@ -5,7 +5,6 @@ pageScripts:
   - /assets/js/mascot.js
 ---
 {% from "nomination-callout.njk" import nominationCallout %}
-{% from "announcement-card.njk" import announcementCard %}
 
 <section class="hero">
   <div class="hero__inner">
@@ -24,13 +23,22 @@ pageScripts:
 
 {{ nominationCallout("Know someone who belongs here?", "Tell us who they are, when they played, and what they did — a few sentences is enough to start.", "Open the nomination form", site.nominateUrl) }}
 
-{% if announcements.length %}
-<section class="announcements">
-  <h2>Announcements</h2>
-  <div class="announcements__list">
-    {% for a in announcements %}
-      {{ announcementCard(a, loop.first) }}
+<section class="about-section" id="about">
+  <h2>About the Hall of Fame</h2>
+  <p>Founded in {{ site.establishedYear }} to recognize the athletes, coaches, teams and contributors who shaped Smithville athletics. Inductions are held every other year at a banquet, where each inductee speaks briefly and receives a plaque that hangs in the school.</p>
+
+  <h3>Support the Hall of Fame</h3>
+  <p>We invite you to partner with us in supporting these important efforts by becoming one of our sponsors. Sponsors may choose to support either the general operating fund of the organization or our Senior Scholarship Fund.</p>
+  <p>Thank you for your continued support of the SHS All Sports Hall of Fame Committee and the student-athletes of Green Local Schools.</p>
+  <a href="{{ site.contributionFormUrl }}" class="btn btn--green">Open the contribution form</a>
+
+  <h3>The committee</h3>
+  <div class="committee-grid">
+    {% for c in committee %}
+    <div class="committee-card">
+      <div class="committee-card__name">{{ c.name }}</div>
+      <div class="committee-card__role">{{ c.role }}</div>
+    </div>
     {% endfor %}
   </div>
 </section>
-{% endif %}

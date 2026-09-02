@@ -17,8 +17,8 @@ npm run build    # one-shot build to _site/
 ## Data model
 
 - **`hall-of-fame-data.csv`** — the inductee roster. Columns: `Inductee name, Induction year, Sport, Graduation year, Category, Accomplishments, Photo filename, Team members, Notes`. `Sport` and `Team members` are comma-separated. All fields are plain text.
-- **`announcements.json`** — local stand-in for a second sheet tab, in the same shape the design doc describes. Only the 3 most recent `publish: "yes"` rows show on the landing page.
-- **`committee.json`** — the About page's committee roster; hand-authored, not part of the CSV schema.
+- **`announcements.json`** — local stand-in for a second sheet tab, in the same shape the design doc describes. Not currently rendered anywhere on the site; it only feeds the build report's photo-mismatch diagnostics for now.
+- **`committee.json`** — the home page's committee roster (in the "About the Hall of Fame" section); hand-authored, not part of the CSV schema.
 
 ## Photos
 
