@@ -120,6 +120,7 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 24px 64px; }
 .hero__est { font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-top: 8px; }
 .hero__headline { font-size: 52px; color: #fff; margin: 0; }
 .hero__sub { color: rgba(245, 242, 234, 0.86); max-width: 440px; margin: 0; }
+.hero .btn { align-self: flex-start; }
 
 /* ===== Mascot widget ===== */
 .mascot { flex: none; width: 300px; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; }
@@ -132,8 +133,7 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 24px 64px; }
   justify-content: center;
   overflow: hidden;
 }
-.mascot__img, .mascot__video { max-width: 88%; max-height: 88%; object-fit: contain; }
-.mascot__video[hidden], .mascot__img[hidden] { display: none; }
+.mascot__img { max-width: 88%; max-height: 88%; object-fit: contain; }
 .mascot__hint { font-family: var(--font-mono); font-size: 10.5px; letter-spacing: 0.12em; text-transform: uppercase; color: rgba(245, 242, 234, 0.7); }
 
 /* ===== Callouts / panels ===== */
