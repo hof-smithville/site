@@ -73,13 +73,18 @@ Same rules as the inductee tab: plain text, no formatting tricks.
 
 ---
 
-## 4. Photos
+## 4. Photos and video
+
+### The governing principle: Google is the whole data repo
+
+Sheets, Drive and Forms are the **entire** maintainer-facing data layer. The committee members only have access to Google, and they are not technically advanced — so anything they need to add or change over time has to live in one of those three, with very specific written instructions. Nothing that the committee is expected to maintain may live in the git repo.
 
 ### Storage
 
 - A single Google Drive folder, shared with the same people as the sheet.
 - The photo filename column points at a file in it.
 - The build pulls sheet and folder with the **same service account credentials** — one auth setup, not two.
+- **Moving-portrait videos live in this same folder**, named to match their photo (`KelleighSimmonsAllen.jpeg` / `KelleighSimmonsAllen.mp4`). Since the filename match deliberately ignores extensions, the extension is the only thing distinguishing a photo from its video — the build separates them by extension (images: jpg/jpeg/png/gif/webp; video: mp4/webm/mov/m4v).
 
 ### Naming convention
 
@@ -175,6 +180,8 @@ Cheap to build and it degrades gracefully: no video, you just get the photo. Als
 
 - **Keep clips to a couple of seconds**, not ten. Longer feels like it's holding you hostage on a hover.
 - **Committee opt-in per inductee**, not applied to all hundred by default. Some inductees are deceased, and a generated video of someone waving at the camera could land as charming or as unsettling depending on the person and the family.
+
+**How the opt-in works:** uploading a video to the Drive photos folder, named to match that inductee's photo, *is* the opt-in — there's no spreadsheet column for it. No video, no effect; the still just sits there. This keeps the decision in the committee's hands using the only tool they have (§4), rather than requiring a developer to add a file to the repo.
 
 ---
 

@@ -2,9 +2,17 @@
 
 Static site, built with [Eleventy](https://www.11ty.dev/). See `hall-of-fame-site-design.md` for the full design notes.
 
-## Current status: local-data-first
+## Current status: live-sheet-capable, with a local fallback
 
-This build reads `hall-of-fame-data.csv` (and `announcements.json` / `committee.json`) directly from the repo — there is **no Google Sheets/Drive integration yet**. That's a deliberate, separate follow-up once a GCP service account exists for the committee's real sheet and Drive folder. See `lib/loadInductees.js` and `lib/loadAnnouncements.js` — those are the only two files a Sheets-backed version would need to change; everything else (templates, matching logic, the build report) stays the same.
+The build reads from the real Google Sheet (`inductees`, `committee`, and `params` tabs) and the paired Drive photo folder when credentials are configured; otherwise it falls back to the local `hall-of-fame-data.csv` / `committee.json` / placeholder form URLs, so `npm run dev` still works with no setup. `announcements.json` is unaffected either way — it's local-only and isn't rendered anywhere on the site (see below).
+
+Live mode turns on automatically once these three environment variables are all set (a `.env` file works — see `.env.example`):
+
+- `GOOGLE_APPLICATION_CREDENTIALS` — path to the service-account key JSON (or `GOOGLE_SERVICE_ACCOUNT_JSON` with the JSON inline, for CI)
+- `GOOGLE_SHEETS_ID` — the spreadsheet ID from its URL
+- `GOOGLE_DRIVE_FOLDER_ID` — the photo folder's ID from its URL
+
+The service account (`shs-hof-build@shs-hof-site.iam.gserviceaccount.com`, project `shs-hof-site`) needs Viewer access to both the sheet and the Drive folder. See `lib/googleAuth.js`, `lib/googleSheets.js`, `lib/googleDrive.js` for the plumbing, and `lib/loadInductees.js` / `lib/loadCommittee.js` / `lib/loadParams.js` for how each data source picks live vs. local.
 
 ## Running locally
 
@@ -16,24 +24,32 @@ npm run build    # one-shot build to _site/
 
 ## Data model
 
-- **`hall-of-fame-data.csv`** — the inductee roster. Columns: `Inductee name, Induction year, Sport, Graduation year, Category, Accomplishments, Photo filename, Team members, Notes`. `Sport` and `Team members` are comma-separated. All fields are plain text.
-- **`announcements.json`** — local stand-in for a second sheet tab, in the same shape the design doc describes. Not currently rendered anywhere on the site; it only feeds the build report's photo-mismatch diagnostics for now.
-- **`committee.json`** — the home page's committee roster (in the "About the Hall of Fame" section); hand-authored, not part of the CSV schema.
+- **Inductee roster** — live: the sheet's `inductees` tab; local: `hall-of-fame-data.csv`. Columns: `Inductee name, Induction year, Sport, Graduation year, Category, Accomplishments, Photo filename, Team members, Notes`. `Sport` and `Team members` are comma-separated. All fields are plain text.
+- **Committee roster** — live: the sheet's `committee` tab (`Name`, `Title`); local: `committee.json`. Feeds the home page's "About the Hall of Fame" section.
+- **Scholarship recipients** — live: the sheet's `scholarships` tab (`Year`, `Recipients`, recipients comma-separated); local: `scholarships.json`. Drives `/scholarships/` and the blurb on the home page.
+- **Form URLs** — live: the sheet's `params` tab (`donation_form_url`, `nomination_form_url`, `scholarship_form_url` keys); local: placeholders in `src/_data/site.js`. A blank value in the sheet falls back to the local placeholder rather than breaking the page, since the committee hasn't filled in `nomination_form_url` or `scholarship_form_url` yet. `scholarship_form_url` has no placeholder at all — the apply button on `/scholarships/` simply doesn't render until there's a real URL.
+- **`announcements.json`** — local-only, not read from the sheet. Not currently rendered anywhere on the site; it only feeds the build report's photo-mismatch diagnostics for now.
+- The sheet's `params` tab also has a `ceremony_tickets_url` key that nothing in the site reads yet.
 
 ## Photos
 
-Drop matched files into:
-- `assets/photos/inductees/` — inductee photos. Filename must match the CSV's `Photo filename` column, case-insensitively, extension ignored (e.g. `Photo filename` = `2024_Smith_John` matches `2024_smith_john.JPG`).
-- `assets/videos/inductees/` — **opt-in** moving-portrait clips. Same filename-matching rule as photos. Adding a clip here for a given inductee **is** the opt-in — there's no separate spreadsheet column for it, since these are Higgsfield-generated and added deliberately, not committee-supplied.
-- `assets/photos/announcements/` — optional photos for `announcements.json` entries, matched the same way.
+In live mode, **both photos and moving-portrait videos come from the one Drive folder** — the committee only has Google access, so nothing they maintain lives in this repo (design doc §4). The folder is synced into `.cache/media/inductees/` (gitignored) and served from `/assets/media/inductees/`.
+
+Filenames match the sheet's `Photo filename` column case-insensitively with the extension ignored, so an inductee's photo and video share one base name (`KelleighSimmonsAllen.jpeg` + `KelleighSimmonsAllen.mp4`) and are told apart **by extension only** — images are `jpg/jpeg/png/gif/webp`, video is `mp4/webm/mov/m4v`. Anything else won't match. Uploading a video *is* the per-inductee opt-in for the moving portrait; there's no spreadsheet column for it.
+
+The sync runs from an `eleventy.before` hook, not a data file — it has to finish before passthrough copy enumerates the directory, or the copy races the download and fails the build.
+
+Locally without credentials, the old local dirs are used instead:
+- `assets/photos/inductees/` — inductee photos, same matching rule.
+- `assets/videos/inductees/` — moving-portrait clips.
+- `assets/photos/announcements/` — optional photos for `announcements.json` entries.
 
 Anyone without a matched photo automatically falls back to `assets/icons/blacksmith-silhoutte.png`. A missing or mismatched filename never fails the build — check `/build-report/` for what didn't match.
 
+Note that a Drive folder the service account can't read returns an empty file list rather than an error, which is indistinguishable from a genuinely empty folder. `lib/googleDrive.js` therefore checks folder reachability explicitly and the build report shows a loud banner if it fails — otherwise a permissions problem looks exactly like "nobody's uploaded photos yet."
+
 ## Not built yet
 
-- Google Sheets + Drive API integration (service account, replacing the local CSV/JSON reads)
-- GitHub Actions nightly/weekly build + deploy to GitHub Pages
+- GitHub Actions nightly/weekly build + deploy to GitHub Pages, using the same service-account credentials as repo secrets
 - Image optimization for real (likely large, phone-photographed) inductee photos
 - Three.js virtual wall (explicitly v2 in the design doc)
-
-The real Google Form URL still needs to be swapped into `src/_data/site.js` (`googleFormUrl`).

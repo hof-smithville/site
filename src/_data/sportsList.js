@@ -1,10 +1,14 @@
-const inductees = require("./inductees.js");
+const loadInductees = require("../../lib/loadInductees");
 
-const seen = new Map();
-for (const i of inductees) {
-  for (const s of i.sports) {
-    if (!seen.has(s.slug)) seen.set(s.slug, s);
+module.exports = async function () {
+  const inductees = await loadInductees();
+
+  const seen = new Map();
+  for (const i of inductees) {
+    for (const s of i.sports) {
+      if (!seen.has(s.slug)) seen.set(s.slug, s);
+    }
   }
-}
 
-module.exports = [...seen.values()].sort((a, b) => a.name.localeCompare(b.name));
+  return [...seen.values()].sort((a, b) => a.name.localeCompare(b.name));
+};

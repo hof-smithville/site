@@ -9,6 +9,8 @@
   },
   "dependencies": {
     "@11ty/eleventy": "^3.1.6",
-    "csv-parse": "^7.0.2"
+    "csv-parse": "^7.0.2",
+    "dotenv": "^16.4.5",
+    "google-auth-library": "^9.14.1"
   }
 }

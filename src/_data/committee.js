@@ -1,1 +1,1 @@
-module.exports = require("../../committee.json");
+module.exports = require("../../lib/loadCommittee");

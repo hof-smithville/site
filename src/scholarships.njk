@@ -1,0 +1,25 @@
+---
+layout: base.njk
+title: Scholarships
+---
+<section class="scholarships">
+  <h1>Senior scholarships</h1>
+  <p class="scholarships__intro">Every year the Hall of Fame awards scholarships to graduating Smithville senior student-athletes who carry on the traditions this hall was built to honor. {{ scholarships.totalRecipients }} scholarships have been awarded since {{ scholarships.firstYear }}.</p>
+
+  {% if site.scholarshipFormUrl %}
+  <a href="{{ site.scholarshipFormUrl }}" class="btn btn--green">Apply for a scholarship</a>
+  {% endif %}
+
+  <div class="scholarships__list">
+    {% for y in scholarships %}
+    <div class="scholarship-year">
+      <div class="scholarship-year__year">{{ y.year }}</div>
+      <ul class="scholarship-year__names">
+        {% for name in y.recipients %}
+        <li>{{ name }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% endfor %}
+  </div>
+</section>
