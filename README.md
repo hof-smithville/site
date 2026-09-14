@@ -1,6 +1,8 @@
 # Smithville All-Sports Hall of Fame
 
-Static site, built with [Eleventy](https://www.11ty.dev/). See `hall-of-fame-site-design.md` for the full design notes.
+Static site, built with [Eleventy](https://www.11ty.dev/). See `docs/hall-of-fame-site-design.md` for the full design notes.
+
+Lives at `hof-smithville/site`; published to <https://hof-smithville.github.io/site/>.
 
 ## Current status: live-sheet-capable, with a local fallback
 
@@ -62,7 +64,7 @@ It needs three repository secrets (Settings → Secrets and variables → Action
 
 Plus Settings → Pages → Source set to **GitHub Actions**.
 
-`PATH_PREFIX` is supplied automatically by `actions/configure-pages` — it's `/shs-hof` for a project site and empty for a custom domain, and `EleventyHtmlBasePlugin` rewrites absolute URLs to match. Any path in a `data-*` attribute has to go through the `url` filter by hand, since the plugin only rewrites `href`/`src` (see `mascot-widget.njk`).
+`PATH_PREFIX` is supplied automatically by `actions/configure-pages` — it's `/site` for this project repo (published at `https://hof-smithville.github.io/site/`) and empty for a custom domain, and `EleventyHtmlBasePlugin` rewrites absolute URLs to match. Any path in a `data-*` attribute has to go through the `url` filter by hand, since the plugin only rewrites `href`/`src` (see `mascot-widget.njk`).
 
 **Two gotchas worth knowing:**
 - GitHub **disables scheduled workflows after 60 days of no commits to the repo**. This site is designed to sit untouched for long stretches, so the cron will eventually be switched off — GitHub emails the repo admin first, and re-enabling is one button in the Actions tab. The build report's timestamp is how you'd notice.
