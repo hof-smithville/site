@@ -121,6 +121,56 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 24px 64px; }
 .hero__headline { font-size: 52px; color: #fff; margin: 0; }
 .hero__sub { color: rgba(245, 242, 234, 0.86); max-width: 440px; margin: 0; }
 .hero .btn { align-self: flex-start; }
+/* Full-width strip across the bottom of the green panel - forced onto its own
+   flex line so it spans past the text column and the mascot. */
+.hero__sports {
+  flex: 1 0 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  margin-top: 8px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(245, 242, 234, 0.18);
+}
+.hero__sport {
+  background: none;
+  border: none;
+  padding: 0;
+  line-height: 0;
+  cursor: zoom-in;
+  border-radius: 4px;
+  transition: transform 0.12s ease, opacity 0.12s ease;
+}
+.hero__sport:hover { transform: scale(1.12); }
+.hero__sport:focus-visible { outline: 2px solid var(--gold); outline-offset: 3px; }
+.hero__sport-icon { width: 46px; height: 46px; object-fit: contain; }
+
+/* Fixed overlay rather than an in-place scale - .hero clips its children. */
+.sport-zoom {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  background: rgba(10, 26, 18, 0.93);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  padding: 24px;
+  cursor: zoom-out;
+}
+.sport-zoom[hidden] { display: none; }
+/* Capped at the icons' native 300px - upscaling past it just looks soft. */
+.sport-zoom__img { width: min(60vw, 60vh, 300px); max-height: 70vh; object-fit: contain; }
+.sport-zoom__name {
+  font-family: var(--font-display);
+  font-size: 30px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--gold);
+}
 
 /* ===== Mascot widget ===== */
 .mascot { flex: none; width: 300px; display: flex; flex-direction: column; align-items: center; gap: 10px; cursor: pointer; }
@@ -259,7 +309,7 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 24px 64px; }
 .nominate { display: flex; gap: 40px; padding-top: 32px; flex-wrap: wrap; }
 .nominate__main { flex: 1 1 500px; }
 .nominate__aside { flex: 0 0 300px; display: flex; flex-direction: column; gap: 16px; }
-.nominate__form-wrap iframe { border: 1px solid var(--line); display: block; }
+.form-note { font-family: var(--font-mono); font-size: 12px; color: #6b6459; margin-top: 12px; }
 
 /* ===== Build report ===== */
 .build-report { padding-top: 32px; }

@@ -1,0 +1,61 @@
+name: Build and deploy
+
+on:
+  # Nightly pull of the sheet + Drive folder. 08:00 UTC is ~3-4am in Ohio.
+  schedule:
+    - cron: "0 8 * * *"
+  # Rebuild whenever the site code itself changes.
+  push:
+    branches: [main]
+  # "Run workflow" button in the Actions tab, for when you don't want to wait.
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# Never let two deploys race each other.
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+
+      - uses: actions/configure-pages@v5
+        id: pages
+
+      - name: Build site
+        run: npm run build
+        env:
+          GOOGLE_SERVICE_ACCOUNT_JSON: ${{ secrets.GOOGLE_SERVICE_ACCOUNT_JSON }}
+          GOOGLE_SHEETS_ID: ${{ secrets.GOOGLE_SHEETS_ID }}
+          GOOGLE_DRIVE_FOLDER_ID: ${{ secrets.GOOGLE_DRIVE_FOLDER_ID }}
+          # Pages serves a project repo from /<repo>/; configure-pages works
+          # out the right value, including "/" for a custom domain.
+          PATH_PREFIX: ${{ steps.pages.outputs.base_path }}
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: _site
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

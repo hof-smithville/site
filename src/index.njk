@@ -3,6 +3,7 @@ layout: base.njk
 title: Home
 pageScripts:
   - /assets/js/mascot.js
+  - /assets/js/sport-zoom.js
 ---
 {% from "nomination-callout.njk" import nominationCallout %}
 
@@ -19,7 +20,20 @@ pageScripts:
     <a href="/inductees/" class="btn btn--gold">Browse all inductees</a>
   </div>
   {% include "mascot-widget.njk" %}
+
+  <div class="hero__sports">
+    {% for sport in allSports %}
+    <button type="button" class="hero__sport" data-sport-zoom aria-label="Enlarge {{ sport.name }} icon">
+      <img src="{{ sport.icon }}" alt="{{ sport.name }}" class="hero__sport-icon" loading="lazy">
+    </button>
+    {% endfor %}
+  </div>
 </section>
+
+<div class="sport-zoom" id="sport-zoom" hidden>
+  <img class="sport-zoom__img" id="sport-zoom-img" src="" alt="">
+  <div class="sport-zoom__name" id="sport-zoom-name"></div>
+</div>
 
 {{ nominationCallout("Know someone who belongs here?", "Tell us who they are, when they played, and what they did — a few sentences is enough to start.", "Open the nomination form", site.nominateUrl) }}
 
@@ -34,7 +48,9 @@ pageScripts:
   <h3>Support the Hall of Fame</h3>
   <p>We invite you to partner with us in supporting these important efforts by becoming one of our sponsors. Sponsors may choose to support either the general operating fund of the organization or our Senior Scholarship Fund.</p>
   <p>Thank you for your continued support of the SHS All Sports Hall of Fame Committee and the student-athletes of Green Local Schools.</p>
-  <a href="{{ site.contributionFormUrl }}" class="btn btn--green">Open the contribution form</a>
+  {% if site.contributionFormUrl %}
+  <a href="{{ site.contributionFormUrl }}" class="btn btn--green" target="_blank" rel="noopener">Open the contribution form</a>
+  {% endif %}
 
   <h3>The committee</h3>
   <div class="committee-grid">

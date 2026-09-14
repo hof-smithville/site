@@ -2,7 +2,13 @@ require("dotenv").config();
 const fs = require("fs");
 const { runDriveSync } = require("./lib/driveSync");
 
-module.exports = function (eleventyConfig) {
+module.exports = async function (eleventyConfig) {
+  // GitHub Pages serves a project repo from /<repo>/, which would break every
+  // absolute /assets/... link. This plugin rewrites them to match PATH_PREFIX;
+  // it's a no-op at the default "/" (custom domain or user-pages site).
+  const { EleventyHtmlBasePlugin } = await import("@11ty/eleventy");
+  eleventyConfig.addPlugin(EleventyHtmlBasePlugin);
+
   eleventyConfig.addPassthroughCopy({ assets: "assets" });
 
   // Photos and moving-portrait videos synced live from Drive land here. The
@@ -13,6 +19,7 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ ".cache/media/inductees": "assets/media/inductees" });
 
   return {
+    pathPrefix: process.env.PATH_PREFIX || "/",
     dir: {
       input: "src",
       output: "_site",

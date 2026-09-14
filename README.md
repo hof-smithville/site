@@ -27,7 +27,7 @@ npm run build    # one-shot build to _site/
 - **Inductee roster** — live: the sheet's `inductees` tab; local: `hall-of-fame-data.csv`. Columns: `Inductee name, Induction year, Sport, Graduation year, Category, Accomplishments, Photo filename, Team members, Notes`. `Sport` and `Team members` are comma-separated. All fields are plain text.
 - **Committee roster** — live: the sheet's `committee` tab (`Name`, `Title`); local: `committee.json`. Feeds the home page's "About the Hall of Fame" section.
 - **Scholarship recipients** — live: the sheet's `scholarships` tab (`Year`, `Recipients`, recipients comma-separated); local: `scholarships.json`. Drives `/scholarships/` and the blurb on the home page.
-- **Form URLs** — live: the sheet's `params` tab (`donation_form_url`, `nomination_form_url`, `scholarship_form_url` keys); local: placeholders in `src/_data/site.js`. A blank value in the sheet falls back to the local placeholder rather than breaking the page, since the committee hasn't filled in `nomination_form_url` or `scholarship_form_url` yet. `scholarship_form_url` has no placeholder at all — the apply button on `/scholarships/` simply doesn't render until there's a real URL.
+- **Form URLs** — the sheet's `params` tab (`donation_form_url`, `nomination_form_url`, `scholarship_form_url`). All three render as links that open in a new tab, and none has a placeholder: a blank cell hides that page's CTA entirely rather than opening a dead link. Fill the cell in and the button appears on the next build — no code change or deploy. (`/nominate/` previously embedded its form in an iframe; that was dropped so every form behaves the same way, and because a non-Google form — the donation link is Zeffy — can refuse to be iframed at all.)
 - **`announcements.json`** — local-only, not read from the sheet. Not currently rendered anywhere on the site; it only feeds the build report's photo-mismatch diagnostics for now.
 - The sheet's `params` tab also has a `ceremony_tickets_url` key that nothing in the site reads yet.
 
@@ -48,8 +48,27 @@ Anyone without a matched photo automatically falls back to `assets/icons/blacksm
 
 Note that a Drive folder the service account can't read returns an empty file list rather than an error, which is indistinguishable from a genuinely empty folder. `lib/googleDrive.js` therefore checks folder reachability explicitly and the build report shows a loud banner if it fails — otherwise a permissions problem looks exactly like "nobody's uploaded photos yet."
 
+## Deployment
+
+`.github/workflows/build-deploy.yml` builds and publishes to GitHub Pages on three triggers: a nightly cron (08:00 UTC), any push to `main`, and a manual "Run workflow" button. The nightly run is what picks up committee edits to the sheet and Drive without anyone touching the repo.
+
+It needs three repository secrets (Settings → Secrets and variables → Actions):
+
+| Secret | Value |
+|---|---|
+| `GOOGLE_SERVICE_ACCOUNT_JSON` | the entire contents of the service-account key JSON file |
+| `GOOGLE_SHEETS_ID` | the spreadsheet ID from its URL |
+| `GOOGLE_DRIVE_FOLDER_ID` | the photo folder's ID from its URL |
+
+Plus Settings → Pages → Source set to **GitHub Actions**.
+
+`PATH_PREFIX` is supplied automatically by `actions/configure-pages` — it's `/shs-hof` for a project site and empty for a custom domain, and `EleventyHtmlBasePlugin` rewrites absolute URLs to match. Any path in a `data-*` attribute has to go through the `url` filter by hand, since the plugin only rewrites `href`/`src` (see `mascot-widget.njk`).
+
+**Two gotchas worth knowing:**
+- GitHub **disables scheduled workflows after 60 days of no commits to the repo**. This site is designed to sit untouched for long stretches, so the cron will eventually be switched off — GitHub emails the repo admin first, and re-enabling is one button in the Actions tab. The build report's timestamp is how you'd notice.
+- GitHub Pages on a **private** repo requires a paid plan. On the free tier the repo has to be public for Pages to work.
+
 ## Not built yet
 
-- GitHub Actions nightly/weekly build + deploy to GitHub Pages, using the same service-account credentials as repo secrets
 - Image optimization for real (likely large, phone-photographed) inductee photos
 - Three.js virtual wall (explicitly v2 in the design doc)

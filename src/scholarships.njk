@@ -7,7 +7,10 @@ title: Scholarships
   <p class="scholarships__intro">Every year the Hall of Fame awards scholarships to graduating Smithville senior student-athletes who carry on the traditions this hall was built to honor. {{ scholarships.totalRecipients }} scholarships have been awarded since {{ scholarships.firstYear }}.</p>
 
   {% if site.scholarshipFormUrl %}
-  <a href="{{ site.scholarshipFormUrl }}" class="btn btn--green">Apply for a scholarship</a>
+  <a href="{{ site.scholarshipFormUrl }}" class="btn btn--green" target="_blank" rel="noopener">Apply for a scholarship</a>
+  <p class="form-note">The form opens in a new tab.</p>
+  {% else %}
+  <p class="form-note">The scholarship application isn't open yet — check back shortly, or reach out to any committee member in the meantime.</p>
   {% endif %}
 
   <div class="scholarships__list">

@@ -1,12 +1,13 @@
-<div class="mascot" id="mascot" data-video-src="/assets/videos/blacksmith1.mp4">
+{# data-* attributes hold paths the HTML base plugin can't see, so they need the url filter explicitly #}
+<div class="mascot" id="mascot" data-video-src="{{ '/assets/videos/blacksmith1.mp4' | url }}">
   <div class="mascot__stage">
     <img
       src="/assets/icons/blacksmith-original.jpg"
       alt="Smithville Blacksmith mascot"
       class="mascot__img"
       data-mascot-img
-      data-rest="/assets/icons/blacksmith-original.jpg"
-      data-hover="/assets/icons/blacksmith-modern.png">
+      data-rest="{{ '/assets/icons/blacksmith-original.jpg' | url }}"
+      data-hover="{{ '/assets/icons/blacksmith-modern.png' | url }}">
   </div>
   <div class="mascot__hint" data-mascot-hint>Hover · click to watch</div>
 </div>

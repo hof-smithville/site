@@ -1,9 +1,5 @@
 const loadParams = require("../../lib/loadParams");
 
-// Placeholders for as long as the sheet's params tab leaves these blank.
-const FALLBACK_GOOGLE_FORM_URL = "https://docs.google.com/forms/d/e/TBD/viewform?embedded=true";
-const FALLBACK_CONTRIBUTION_FORM_URL = "https://docs.google.com/forms/d/e/TBD/viewform";
-
 module.exports = async function () {
   const params = await loadParams();
 
@@ -16,12 +12,11 @@ module.exports = async function () {
       { label: "Scholarships", url: "/scholarships/" },
     ],
     nominateUrl: "/nominate/",
-    googleFormUrl: params.nomination_form_url
-      ? `${params.nomination_form_url}${params.nomination_form_url.includes("?") ? "&" : "?"}embedded=true`
-      : FALLBACK_GOOGLE_FORM_URL,
-    contributionFormUrl: params.donation_form_url || FALLBACK_CONTRIBUTION_FORM_URL,
-    // No placeholder for this one - the scholarships page hides its apply CTA
-    // entirely until the committee puts a real URL in the sheet.
+    // All three open in a new tab rather than embedding, so none of them get a
+    // placeholder URL: a blank cell in the sheet hides that page's CTA instead
+    // of opening a dead link in a fresh tab.
+    nominationFormUrl: params.nomination_form_url || null,
+    contributionFormUrl: params.donation_form_url || null,
     scholarshipFormUrl: params.scholarship_form_url || null,
   };
 };
