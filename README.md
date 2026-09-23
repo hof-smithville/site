@@ -35,7 +35,7 @@ npm run build    # one-shot build to _site/
 
 ## Photos
 
-In live mode, **both photos and moving-portrait videos come from the one Drive folder** — the committee only has Google access, so nothing they maintain lives in this repo (design doc §4). The folder is synced into `.cache/media/inductees/` (gitignored) and served from `/assets/media/inductees/`.
+In live mode, **both photos and moving-portrait videos come from the one Drive folder** — the committee only has Google access, so nothing they maintain lives in this repo (design doc §4). The folder is downloaded into `.cache/drive/inductees/`, then each photo is resized into two WebP copies (`<name>.webp` at 800px for detail pages, `<name>-thumb.webp` at 480px for cards) in `.cache/media/inductees/` (both gitignored), which is served from `/assets/media/inductees/`. Uploads of any size are fine; originals are never published. Files that can't be read as images are listed on the build report.
 
 Filenames match the sheet's `Photo filename` column case-insensitively with the extension ignored, so an inductee's photo and video share one base name (`KelleighSimmonsAllen.jpeg` + `KelleighSimmonsAllen.mp4`) and are told apart **by extension only** — images are `jpg/jpeg/png/gif/webp`, video is `mp4/webm/mov/m4v`. Anything else won't match. Uploading a video *is* the per-inductee opt-in for the moving portrait; there's no spreadsheet column for it.
 

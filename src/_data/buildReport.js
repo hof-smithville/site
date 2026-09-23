@@ -15,6 +15,7 @@ module.exports = async function () {
     announcementPhotoMismatches: announcements.mismatches || [],
     badYears: inductees.badYears,
     driveError: inductees.driveError,
+    imageErrors: inductees.imageErrors,
     flaggedNotes: inductees.filter((i) => i.notes),
   };
 };

@@ -26,7 +26,7 @@ eleventyComputed:
   <div class="class-page__list">
     {% for p in cls.inductees %}
       <a class="class-row" href="{{ p.url }}">
-        <img src="{{ p.photoUrl }}" alt="{{ p.name }}" class="class-row__photo">
+        <img src="{{ p.photoThumbUrl }}" alt="{{ p.name }}" class="class-row__photo">
         <div class="class-row__main">
           <div class="class-row__name">{{ p.name }}</div>
           <div class="class-row__meta">{{ p.category }} · {{ p.sportsLabel }}{% if p.graduationYear %} · Class of {{ p.graduationYear }}{% endif %}</div>

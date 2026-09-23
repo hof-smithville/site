@@ -17,6 +17,12 @@ title: Build report
   <div class="build-report__alert">Drive sync problem: {{ buildReport.driveError }} Every photo will fall back to the silhouette until this is fixed.</div>
   {% endif %}
 
+  {% if buildReport.imageErrors.length %}
+  <div class="build-report__alert">These Drive files couldn't be read as images, so those inductees show the silhouette. Re-save them as JPEG or PNG and upload again:
+    <ul>{% for e in buildReport.imageErrors %}<li>{{ e }}</li>{% endfor %}</ul>
+  </div>
+  {% endif %}
+
   <h2>Photo filename mismatches</h2>
   <p class="build-report__note">Matching is case-insensitive and ignores the file extension. A missing photo never fails the build — the silhouette placeholder is used instead.</p>
   {% if buildReport.photoMismatched.length %}

@@ -243,7 +243,8 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 24px 64px; }
 .card { display: block; border: 1px solid var(--line); background: #fff; }
 .card--inductee[hidden] { display: none; }
 .card__photo { background: #dcd7cc; aspect-ratio: 1 / 1.05; overflow: hidden; }
-.card__photo img { width: 100%; height: 100%; object-fit: cover; }
+/* Bias the crop upward: tall photos otherwise lose the head to a center crop. */
+.card__photo img { width: 100%; height: 100%; object-fit: cover; object-position: center 20%; }
 .card__body { padding: 12px 13px 14px; }
 .card__name { font-family: var(--font-display); font-size: 18px; text-transform: uppercase; color: var(--green); margin-bottom: 4px; }
 .card__meta { font-family: var(--font-mono); font-size: 11px; color: #6b6459; }
@@ -252,7 +253,7 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 24px 64px; }
 .detail { display: flex; gap: 40px; padding-top: 32px; flex-wrap: wrap; }
 .detail__photo-col { flex: none; width: 320px; }
 .detail__photo { position: relative; background: #dcd7cc; }
-.detail__photo img, .detail__photo video { width: 100%; height: 380px; object-fit: cover; }
+.detail__photo img, .detail__photo video { width: 100%; height: 380px; object-fit: cover; object-position: center 20%; }
 .detail__photo video[hidden], .detail__photo img[hidden] { display: none; }
 .detail__body { flex: 1 1 420px; }
 .detail__eyebrow { font-family: var(--font-mono); font-size: 11.5px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
@@ -276,7 +277,7 @@ main { max-width: var(--max-width); margin: 0 auto; padding: 0 24px 64px; }
 .class-page__sub { font-size: 13px; color: rgba(245, 242, 234, 0.8); }
 .class-page__list { display: flex; flex-direction: column; }
 .class-row { display: flex; align-items: center; gap: 20px; padding: 16px 0; border-top: 1px solid var(--line); flex-wrap: wrap; }
-.class-row__photo { width: 64px; height: 64px; object-fit: cover; flex: none; background: #dcd7cc; }
+.class-row__photo { width: 64px; height: 64px; object-fit: cover; object-position: center 20%; flex: none; background: #dcd7cc; }
 .class-row__main { min-width: 180px; }
 .class-row__name { font-family: var(--font-display); font-size: 22px; text-transform: uppercase; color: var(--green); }
 .class-row__meta { font-family: var(--font-mono); font-size: 11px; color: #6b6459; margin-top: 4px; }
