@@ -326,7 +326,7 @@ th, td { text-align: left; padding: 8px 10px; border-top: 1px solid var(--line);
 th { color: #6b6459; text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.08em; }
 
 /* ===== Committee help (unlinked) ===== */
-.help { padding-top: 32px; max-width: 760px; font-size: 17px; }
+.help { padding-top: 64px; max-width: 760px; font-size: 17px; }
 .help h2 { margin-top: 48px; scroll-margin-top: 16px; }
 .help h3 { font-size: 20px; margin-top: 24px; color: var(--ink); }
 .help p, .help li { color: var(--text); }
