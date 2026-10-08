@@ -325,6 +325,33 @@ table { border-collapse: collapse; width: 100%; margin-bottom: 24px; font-family
 th, td { text-align: left; padding: 8px 10px; border-top: 1px solid var(--line); }
 th { color: #6b6459; text-transform: uppercase; font-size: 10.5px; letter-spacing: 0.08em; }
 
+/* ===== Committee help (unlinked) ===== */
+.help { padding-top: 32px; max-width: 760px; font-size: 17px; }
+.help h2 { margin-top: 48px; scroll-margin-top: 16px; }
+.help h3 { font-size: 20px; margin-top: 24px; color: var(--ink); }
+.help p, .help li { color: var(--text); }
+.help__lead { font-size: 19px; }
+.help__callout { background: var(--highlight-bg); color: var(--highlight-text); border-left: 4px solid var(--gold); padding: 14px 18px; margin-bottom: 28px; }
+.help__toc { background: var(--panel); border: 1px solid var(--line); padding: 16px 20px; }
+.help__toc-label { font-family: var(--font-mono); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; color: #6b6459; margin-bottom: 6px; }
+.help__toc ol { margin: 0; }
+.help__toc a { text-decoration: underline; }
+.help__steps { padding-left: 0; list-style: none; counter-reset: step; }
+.help__steps li { counter-increment: step; position: relative; padding: 10px 0 10px 48px; border-top: 1px solid var(--line); }
+.help__steps li:last-child { border-bottom: 1px solid var(--line); }
+.help__steps li::before { content: counter(step); position: absolute; left: 0; top: 9px; width: 32px; height: 32px; border-radius: 50%; background: var(--green); color: var(--cream); font-family: var(--font-mono); font-size: 14px; display: flex; align-items: center; justify-content: center; }
+.help__steps a, .help__tip a, .help__table a, .help__callout a { text-decoration: underline; }
+.help__tip { background: var(--panel); border-left: 4px solid var(--green); padding: 12px 16px; }
+.help__rules li { margin-bottom: 10px; }
+.help code { font-family: var(--font-mono); font-size: 0.85em; background: var(--cream); border: 1px solid var(--line); padding: 1px 6px; white-space: nowrap; }
+.help kbd { font-family: var(--font-mono); font-size: 0.85em; background: var(--panel); border: 1px solid var(--line); border-bottom-width: 2px; border-radius: 3px; padding: 1px 6px; }
+.help__table-wrap { overflow-x: auto; }
+.help__table { font-family: var(--font-body); font-size: 15px; background: var(--panel); }
+.help__table th { font-family: var(--font-mono); }
+.help__table td { vertical-align: top; }
+.help__table td:first-child { font-weight: 600; white-space: nowrap; }
+.help__table td code { white-space: normal; }
+
 /* ===== Responsive ===== */
 @media (max-width: 720px) {
   main { padding: 0 16px 48px; }

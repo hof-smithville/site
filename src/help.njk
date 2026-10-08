@@ -1,0 +1,163 @@
+---
+layout: base.njk
+title: Help
+noindex: true
+---
+{#- Not linked from anywhere on purpose: committee members reach it by typing
+    the address. Keep the language plain - the readers aren't technical. -#}
+<section class="help">
+  <h1>How to update the website</h1>
+  <p class="help__lead">This guide is for Hall of Fame committee members. You do not need to know anything about websites. Everything on the site comes from <strong>one Google Sheet</strong>. Change the sheet and the website updates itself overnight.</p>
+
+  <div class="help__callout">
+    <strong>Remember:</strong> changes show up on the website <strong>the next morning</strong> (the site refreshes itself around 4&nbsp;a.m. every night). Can't wait? <a href="#update-now">Update the website right away</a> from the sheet's <strong>Website</strong> menu.
+  </div>
+
+  <nav class="help__toc">
+    <div class="help__toc-label">On this page</div>
+    <ol>
+      <li><a href="#open">Open the Google Sheet</a></li>
+      <li><a href="#add-inductee">Add a new inductee</a></li>
+      <li><a href="#columns">What goes in each inductee column</a></li>
+      <li><a href="#add-team">Add a team</a></li>
+      <li><a href="#photo">Add an inductee's photo</a></li>
+      <li><a href="#edit-inductee">Fix or remove an inductee</a></li>
+      <li><a href="#add-scholarship">Add this year's scholarship winners</a></li>
+      <li><a href="#edit-scholarship">Fix a scholarship winner</a></li>
+      <li><a href="#update-now">Update the website right away</a></li>
+      <li><a href="#check">Check your work</a></li>
+      <li><a href="#rules">Rules that keep the site working</a></li>
+      <li><a href="#oops">"Oops!" How to undo a mistake</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="open">1. Open the Google Sheet</h2>
+  <ol class="help__steps">
+    <li>Sign in to the Google account the committee gave edit access to.</li>
+    <li>Open the sheet: <a href="https://docs.google.com/spreadsheets/d/1PaNpe6nyvnZ8II-g69T2JeQcCFhgiLew0WR3J5CWgYA/edit" target="_blank" rel="noopener">hall_of_fame_data</a> (opens in a new tab).</li>
+    <li>Look at the <strong>bottom of the screen</strong>. You'll see tabs named <strong>inductees</strong>, <strong>committee</strong>, <strong>params</strong> and <strong>scholarships</strong>. Click a tab to switch to it.</li>
+  </ol>
+  <p class="help__tip">If the sheet says "You need access" or you can't type in it, ask a committee member who already has access to share it with you as an <strong>Editor</strong>.</p>
+
+  <h2 id="add-inductee">2. Add a new inductee</h2>
+  <ol class="help__steps">
+    <li>Click the <strong>inductees</strong> tab at the bottom.</li>
+    <li>Scroll down to the <strong>first empty row</strong> below the last inductee.</li>
+    <li>Click the cell in the <strong>Inductee name</strong> column and type the person's name, for example <code>John Smith</code>.</li>
+    <li>Press the <kbd>Tab</kbd> key to move one cell to the right.</li>
+    <li>Type the <strong>Induction year</strong>, the year they enter the Hall of Fame, for example <code>2026</code>.</li>
+    <li>Keep pressing <kbd>Tab</kbd> and fill in the rest of the row. The <a href="#columns">table below</a> explains what goes in each column.</li>
+    <li>When you're done, just close the tab. <strong>Google saves automatically.</strong> There is no Save button.</li>
+  </ol>
+  <p class="help__tip">The order of rows doesn't matter. The website sorts inductees by year and name on its own.</p>
+
+  <h2 id="columns">3. What goes in each inductee column</h2>
+  <div class="help__table-wrap">
+    <table class="help__table">
+      <thead><tr><th>Column</th><th>What to type</th><th>Example</th></tr></thead>
+      <tbody>
+        <tr><td>Inductee name</td><td><strong>Required.</strong> The name as it should appear on the site. For a team, the team's name.</td><td><code>John Smith</code></td></tr>
+        <tr><td>Induction year</td><td><strong>Required.</strong> The year they were inducted. Numbers only.</td><td><code>2026</code></td></tr>
+        <tr><td>Sport</td><td>The sport. If there's more than one, separate them with commas.</td><td><code>Football, Track</code></td></tr>
+        <tr><td>Graduation year</td><td>The year they graduated. Numbers only. Leave blank if unknown.</td><td><code>1987</code></td></tr>
+        <tr><td>Category</td><td>Type exactly one of these: <code>Athlete</code>, <code>Coach</code>, <code>Team</code>, or <code>Contributor</code>.</td><td><code>Athlete</code></td></tr>
+        <tr><td>Accomplishments</td><td>A few sentences about why they're in the Hall of Fame. This is the main text on their page.</td><td><code>3-time All-State selection, team captain senior year</code></td></tr>
+        <tr><td>Photo filename</td><td>The name of their photo file in the Google Drive folder. See <a href="#photo">Add a photo</a>. Leave blank if there's no photo yet.</td><td><code>JohnSmith</code></td></tr>
+        <tr><td>Team members</td><td><strong>Teams only.</strong> Each player and coach, separated by commas.</td><td><code>Sarah Johnson, Maria Garcia, Coach Pat Davis</code></td></tr>
+        <tr><td>Notes</td><td>Private notes for the committee. <strong>This never appears on the public site.</strong> Use it for things like "need to double-check this record."</td><td><code>Verify win-loss record</code></td></tr>
+      </tbody>
+    </table>
+  </div>
+  <p class="help__tip">These sports get a small picture icon on the site: Baseball, Basketball, Cheerleading, Cross Country, Football, Golf, Soccer, Softball, Track (or Track and Field), Volleyball and Wrestling. Other sports work fine. They just show without an icon.</p>
+
+  <h2 id="add-team">4. Add a team</h2>
+  <ol class="help__steps">
+    <li>Follow the steps in <a href="#add-inductee">Add a new inductee</a>, using the team's name as the <strong>Inductee name</strong>, for example <code>1994 Girls Basketball Team</code>.</li>
+    <li>In the <strong>Category</strong> column, type <code>Team</code>.</li>
+    <li>In the <strong>Team members</strong> column, type every name with a comma between each one: <code>Sarah Johnson, Maria Garcia, Lisa Chen</code></li>
+  </ol>
+
+  <h2 id="photo">5. Add an inductee's photo</h2>
+  <p>Photos are kept in a Google Drive folder, not in the sheet. The sheet just says which photo belongs to whom.</p>
+  <ol class="help__steps">
+    <li>Open the <a href="https://drive.google.com/drive/folders/1S7OFE5zSloM42X5vP9XtDvHed0x26EUl" target="_blank" rel="noopener">photo folder in Google Drive</a> (opens in a new tab).</li>
+    <li>Before you upload, give the photo a simple name with <strong>no spaces</strong>. The person's name works well, for example <code>JohnSmith.jpg</code>.</li>
+    <li>Drag the photo into the Drive folder, or click <strong>+ New</strong> &rarr; <strong>File upload</strong> and pick it.</li>
+    <li>Go back to the sheet. In that inductee's <strong>Photo filename</strong> column, type the same name: <code>JohnSmith</code>. You can leave off the <code>.jpg</code> at the end. Capital letters don't matter.</li>
+  </ol>
+  <p class="help__tip">Use <strong>JPG</strong> or <strong>PNG</strong> photos. iPhones sometimes save photos as <strong>HEIC</strong>, which won't show up on the site. If your photo ends in <code>.heic</code>, email it to yourself or take a screenshot of it, and upload that instead. Any size photo is fine.</p>
+  <p class="help__tip">Anyone without a photo gets the blacksmith silhouette automatically, so it's fine to add the person now and the photo later.</p>
+  <p class="help__tip"><strong>Optional moving portrait:</strong> if you also upload a short video clip with the <em>same name</em> (for example <code>JohnSmith.mp4</code>), the photo will come to life when visitors hover over it.</p>
+
+  <h2 id="edit-inductee">6. Fix or remove an inductee</h2>
+  <h3>To fix a typo or change information</h3>
+  <ol class="help__steps">
+    <li>Open the <strong>inductees</strong> tab.</li>
+    <li>Find the person. Pressing <kbd>Ctrl</kbd>+<kbd>F</kbd> (or <kbd>&#8984;</kbd>+<kbd>F</kbd> on a Mac) and typing their name will jump straight to them.</li>
+    <li>Click the cell you want to change, type the new text, and press <kbd>Enter</kbd>.</li>
+  </ol>
+  <h3>To remove someone completely</h3>
+  <ol class="help__steps">
+    <li>Find the person's row.</li>
+    <li><strong>Right-click the row number</strong> on the far left of their row.</li>
+    <li>Choose <strong>Delete row</strong>.</li>
+  </ol>
+
+  <h2 id="add-scholarship">7. Add this year's scholarship winners</h2>
+  <ol class="help__steps">
+    <li>Click the <strong>scholarships</strong> tab at the bottom of the sheet.</li>
+    <li>Find the first empty row.</li>
+    <li>In the <strong>Year</strong> column, type the year, for example <code>2027</code>.</li>
+    <li>Press <kbd>Tab</kbd> to move to the <strong>Recipients</strong> column.</li>
+    <li>Type every winner's name in that <strong>one cell</strong>, with a comma between each name: <code>Kaitlyn Carr, Luke DeRodes</code></li>
+    <li>Press <kbd>Enter</kbd>. That's it. Google saves automatically.</li>
+  </ol>
+  <p class="help__tip">Put all of a year's winners in one row. Don't make a separate row for each student. The site counts the winners and puts the newest year first on its own.</p>
+
+  <h2 id="edit-scholarship">8. Fix a scholarship winner</h2>
+  <ol class="help__steps">
+    <li>Open the <strong>scholarships</strong> tab and find the year.</li>
+    <li>Double-click the <strong>Recipients</strong> cell for that year so you can edit the text inside it.</li>
+    <li>Fix the name, add a missing one (with a comma before it), or delete one (along with its comma).</li>
+    <li>Press <kbd>Enter</kbd>.</li>
+  </ol>
+
+  <h2 id="update-now">9. Update the website right away</h2>
+  <p>You don't have to do this. The website updates itself every night. Use it when you want to see a change today.</p>
+  <ol class="help__steps">
+    <li>Finish all your changes in the sheet (and upload any photos to Drive) first.</li>
+    <li>In the sheet's top menu, click <strong>Website</strong>. It's to the right of <strong>Help</strong>. If you don't see it, reload the page and wait a few seconds.</li>
+    <li>Click <strong>Update website now</strong>.</li>
+    <li><strong>The first time only:</strong> Google asks for permission. Click <strong>Continue</strong> and choose your Google account. If you see "Google hasn't verified this app," click <strong>Advanced</strong>, then <strong>Go to &hellip; (unsafe)</strong>, then <strong>Allow</strong>. This is normal for the committee's own script. Then click <strong>Website</strong> &rarr; <strong>Update website now</strong> again.</li>
+    <li>A message says the update has started. Click <strong>OK</strong>.</li>
+    <li>Wait a few minutes. To see whether it's finished, click <strong>Website</strong> &rarr; <strong>Check last update</strong>.</li>
+  </ol>
+  <p class="help__tip">Clicking it more than once won't hurt anything. Just give each update a few minutes to finish.</p>
+
+  <h2 id="check">10. Check your work</h2>
+  <ol class="help__steps">
+    <li>Wait until the next morning, or until <strong>Website</strong> &rarr; <strong>Check last update</strong> says the update finished.</li>
+    <li>Visit the website and find your change on the <a href="/inductees/">Inductees</a> or <a href="/scholarships/">Scholarships</a> page. If the website was already open, reload the page.</li>
+    <li>If a photo isn't showing, open the <a href="/build-report/">build report</a> (another hidden page, like this one). It lists every photo the site couldn't find, so you can see which filename needs fixing.</li>
+  </ol>
+  <p class="help__tip">Still stuck, or did the <strong>Website</strong> menu show an error? Contact the person who manages the website.</p>
+
+  <h2 id="rules">11. Rules that keep the site working</h2>
+  <ul class="help__rules">
+    <li><strong>Don't change row 1.</strong> The headings at the top of each tab (like <em>Inductee name</em> or <em>Recipients</em>) are how the website finds the information. Don't rename, move or delete them.</li>
+    <li><strong>Don't rename the tabs</strong> at the bottom of the sheet.</li>
+    <li><strong>Commas mean "next item."</strong> In the Sport, Team members and Recipients columns, a comma starts a new name. Don't put a comma inside a single name. Write <code>Bob Jones Jr</code>, not <code>Bob Jones, Jr.</code></li>
+    <li><strong>Years are just numbers.</strong> Type <code>1987</code>, not <code>'87</code> or <code>Class of 1987</code>.</li>
+    <li><strong>One person (or team) per row.</strong></li>
+    <li>Blank rows are fine. The website skips them.</li>
+  </ul>
+
+  <h2 id="oops">12. "Oops!" How to undo a mistake</h2>
+  <ol class="help__steps">
+    <li><strong>Just did it?</strong> Press <kbd>Ctrl</kbd>+<kbd>Z</kbd> (or <kbd>&#8984;</kbd>+<kbd>Z</kbd> on a Mac) to undo. Press it again to undo more.</li>
+    <li><strong>Did it a while ago?</strong> In the sheet's top menu, click <strong>File</strong> &rarr; <strong>Version history</strong> &rarr; <strong>See version history</strong>.</li>
+    <li>On the right side, click a date and time from <em>before</em> the mistake.</li>
+    <li>Click <strong>Restore this version</strong> at the top.</li>
+  </ol>
+  <p class="help__tip">Nothing you do in the sheet can permanently break the website. Fix the sheet, and the site fixes itself the next morning.</p>
+</section>

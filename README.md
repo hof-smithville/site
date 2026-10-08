@@ -64,6 +64,8 @@ It needs three repository secrets (Settings → Secrets and variables → Action
 
 Plus Settings → Pages → Source set to **GitHub Actions**.
 
+**On-demand rebuilds from the sheet.** `tools/update-site-menu.gs` is an Apps Script bound to the sheet (Extensions → Apps Script) that adds a **Website → Update website now / Check last update** menu, so the committee doesn't have to wait for the nightly run. It calls the workflow's `workflow_dispatch` with a fine-grained GitHub token stored in the script's `GITHUB_TOKEN` script property: created under the `hof-smithville` account, scoped to `site` only, **Actions: Read and write** and nothing else. Setup steps are at the top of the file. When the token expires the menu shows an "expired" error, but the nightly cron keeps working; generate a new token and replace the property. The committee-facing instructions are on the unlinked `/help/` page.
+
 `PATH_PREFIX` is supplied automatically by `actions/configure-pages` — it's `/site` for this project repo (published at `https://hof-smithville.github.io/site/`) and empty for a custom domain, and `EleventyHtmlBasePlugin` rewrites absolute URLs to match. Any path in a `data-*` attribute has to go through the `url` filter by hand, since the plugin only rewrites `href`/`src` (see `mascot-widget.njk`).
 
 **Two gotchas worth knowing:**
